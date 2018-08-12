@@ -4,7 +4,8 @@ import numpy as np
 
 class ChildPopulation:
     """Selection, cross, mutation """
-    def roulette(self, pop, evaluated_pop):
+    @staticmethod
+    def roulette(pop, evaluated_pop):
         """ Selection using roulette method
         pop - population of coded units
         evaluated_pop - 'ndarray' object with units evaluation
@@ -27,7 +28,8 @@ class ChildPopulation:
 
         return new_pop
 
-    def cross(self, pop, pk):
+    @staticmethod
+    def cross(pop, pk):
         """ Single point cross
         pop - population of coded units
         pk - cross probability for couple units, range [0,1]
@@ -56,7 +58,8 @@ class ChildPopulation:
 
         return new_pop
 
-    def mutate(self, pop, pm):
+    @staticmethod
+    def mutate(pop, pm):
         """ Binary mutation
         pop - population of coded units
         pm - mutation probability for single bit, range [0,1]

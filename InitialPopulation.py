@@ -3,7 +3,8 @@ import numpy as np
 
 
 class InitialPopulation:
-    def nbits(self, a, b, dx):
+    @staticmethod
+    def nbits(a, b, dx):
         """Number of bits needed to code real number from range [a, b] with 'dx' step
         Method return number of bits and new step
              a - beginning of range
@@ -19,7 +20,8 @@ class InitialPopulation:
         dx_new = dif / (2 ** B - 1)
         return B, dx_new
 
-    def gen_population(self, P, N, B):
+    @staticmethod
+    def gen_population(P, N, B):
         """ Generate population of random binary units. Population stored in
         'ndarray' object
         P - number of units
@@ -33,7 +35,8 @@ class InitialPopulation:
                 pop[i][j] = np.random.randint(2)
         return pop
 
-    def decode_individual(self, individual, N, B, a, dx):
+    @staticmethod
+    def decode_individual(individual, N, B, a, dx):
         """Method to decode units, converting from binary to decimal
         individual - binary unit coding 'N' variables, 'ndarray' object
         N - number of variables
@@ -52,7 +55,8 @@ class InitialPopulation:
         decode_individual = np.array(indiv_new).__mul__(dx).__add__(a)
         return decode_individual
 
-    def evaluate_population(self, func, pop, N, B, a, dx):
+    @staticmethod
+    def evaluate_population(func, pop, N, B, a, dx):
         """ Evaluate units in population, running 'func' on each unit
         func - goal function
         pop - population of coded units
@@ -64,13 +68,14 @@ class InitialPopulation:
         """
         population = []
         for i in range(len(pop)):
-            population.append(self.decode_individual(pop[i], N, B, a, dx))
+            population.append(InitialPopulation.decode_individual(pop[i], N, B, a, dx))
         for j in range(len(population)):
             population[j] = func(population[j])
         evaluated_pop = np.array(population)
         return evaluated_pop
 
-    def get_best(self, pop, evaluated_pop):
+    @staticmethod
+    def get_best(pop, evaluated_pop):
         """ Method return best unit from population(max unit)
         pop - population of coded units
         evaluated_pop - 'ndarray' object with units evaluation
