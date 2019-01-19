@@ -1,1 +1,1 @@
-# Main loop of genetic algoritm
+# Main loop of genetic algorithm
